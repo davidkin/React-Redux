@@ -1,13 +1,8 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 import { connect } from 'react-redux';
-import actions from '../engine/actions'
+import actions from '../engine/actions';
 
 class Post extends Component {
-    // state = {
-    //     post: null
-    // }
-
     // componentDidMount() {
     //     const id = this.props.match.params.post_id;
     //     axios.get(`https://jsonplaceholder.typicode.com/posts/${id}`)

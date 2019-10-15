@@ -1,17 +1,20 @@
+
 const initState = {
-    posts: [
-        { id: 1, title: 'Start', body: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptates itaque, fugiat ratione dolorem facere modi quasi maiores illo laboriosam nemo neque id. Reiciendis neque earum nesciunt eligendi ipsa, numquam dolore.' },
-        { id: 2, title: 'Middle', body: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptates itaque, fugiat ratione dolorem facere modi quasi maiores illo laboriosam nemo neque id. Reiciendis neque earum nesciunt eligendi ipsa, numquam dolore.' },
-        { id: 3, title: 'End', body: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptates itaque, fugiat ratione dolorem facere modi quasi maiores illo laboriosam nemo neque id. Reiciendis neque earum nesciunt eligendi ipsa, numquam dolore.' },
-    ]
+    posts: []
 };
 
 const rootReducer = (state = initState, action) => {
-    const { type, payload: id } = action;
+    const { type, payload } = action;
     
     switch(type) {
+        case 'SET_STATE': {
+            return {
+                ...state,
+                posts: payload
+            }
+        }
         case 'DELETE_POST': {
-            const newPosts = state.posts.filter(post => post.id !== id);
+            const newPosts = state.posts.filter(post => post.id !== payload);
     
             return {
                 ...state,

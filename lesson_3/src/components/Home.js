@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Pokeball from '../pokeball.png';
 import { connect } from 'react-redux';
+import actions from '../engine/actions';
+import { api } from '../config/api';
 
 // axios.get('https://jsonplaceholder.typicode.com/posts')
 //             .then(res => {
@@ -11,6 +13,11 @@ import { connect } from 'react-redux';
 //             }); 
 
 class Home extends Component {
+
+    componentDidMount() {
+        const { getPosts } = this.props;
+        getPosts();
+    }
     
     render() {
         const { posts } = this.props;
@@ -53,4 +60,20 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps)(Home);
+const mapDispatchToProps = (dispatch) => {
+    return {
+        getPosts: () => {
+            api.getPosts().then(res => {
+                const posts = res.data.slice(0, 10);
+                
+                dispatch(actions.onGetPosts(posts));
+            });
+        }
+    }
+}
+
+
+export default connect (
+    mapStateToProps,
+    mapDispatchToProps
+)(Home);
